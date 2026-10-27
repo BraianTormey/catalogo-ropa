@@ -8,19 +8,25 @@
 <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+<header class="top">
+  <div class="wrap bar">
+    <span class="logo" id="logo"></span>
+    <span class="brand" id="brand"></span>
+  </div>
+</header>
+
 <div class="wrap">
-  <header>
-    <h1>Ropa disponible</h1>
-    <p>Tocá una prenda para ver todas sus fotos, elegir el talle y escribirle a la vendedora.</p>
-  </header>
   <div class="tools">
     <input id="q" type="search" placeholder="Buscar prenda…" aria-label="Buscar prenda">
     <label class="avail"><input type="checkbox" id="onlyStock"> Solo con stock</label>
   </div>
   <div class="chips" id="chips" role="group" aria-label="Categorías"></div>
   <main class="grid" id="grid"></main>
-  <footer>Los precios y el stock pueden cambiar. La compra se confirma por WhatsApp.</footer>
 </div>
+
+<footer class="foot">
+  <div class="wrap" id="footer"></div>
+</footer>
 
 <dialog id="modal" aria-label="Detalle de la prenda">
   <button class="close" id="close" aria-label="Cerrar">✕</button>

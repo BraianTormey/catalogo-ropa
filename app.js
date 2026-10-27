@@ -80,4 +80,17 @@ modal.addEventListener("keydown", e => {
   if (e.key === "ArrowRight") mover(1);
 });
 
+/* ---- Header y footer ---- */
+document.title = TIENDA.nombre;
+$("#brand").textContent = TIENDA.nombre;
+$("#logo").innerHTML = `<img src="${TIENDA.logo}" alt="Logo de ${TIENDA.nombre}">`;
+$("#logo img").onerror = () => { $("#logo").textContent = TIENDA.nombre[0]; };
+$("#footer").innerHTML = `<div class="cols">
+  <div><h2>Nuestro local</h2><p>${TIENDA.direccion}</p><p>${TIENDA.horarios}</p></div>
+  <div><h2>Contacto</h2><p>${TIENDA.vendedora}</p>
+    <p><a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${TIENDA.telefono}</a></p>
+    <p>${TIENDA.instagram}</p></div>
+</div>
+<p class="copy">© ${new Date().getFullYear()} ${TIENDA.nombre}. Precios y stock sujetos a cambios.</p>`;
+
 render();

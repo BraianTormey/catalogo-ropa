@@ -5,6 +5,18 @@
              Ej: fotos: ["fotos/remera-1.jpg", "fotos/remera-2.jpg"]
              Si la dejás vacía ([]), se muestran fotos de relleno.
    stock:    cantidad disponible por talle (0 = agotado en ese talle). */
+/* ====== DATOS DE LA TIENDA (header y footer) ======
+   logo: imagen dentro de "fotos/" (ej: "fotos/logo.png"). Si no existe, se muestra la inicial del nombre. */
+const TIENDA = {
+  nombre: "Nombre de la tienda",
+  logo: "fotos/logo.png",
+  direccion: "Calle 123, Buenos Aires",
+  horarios: "Lunes a sábado de 10 a 19 h",
+  vendedora: "Nombre de la vendedora",
+  telefono: "+54 9 11 0000-0000",
+  instagram: "@tutienda"
+};
+
 const WHATSAPP = "5491100000000";
 const MONEDA = "$";
 const PRODUCTOS = [
