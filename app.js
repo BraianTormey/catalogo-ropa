@@ -16,6 +16,7 @@ $("#chips").addEventListener("click", e => {
   const b = e.target.closest(".chip"); if (!b) return;
   cat = b.dataset.c;
   document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b));
+  $("#pageTitle").textContent = cat === "Todas" ? "Catálogo" : cat;
   render();
 });
 $("#q").addEventListener("input", render);
@@ -26,16 +27,13 @@ function render() {
   const list = PRODUCTOS.map((p, i) => ({ p, i })).filter(({ p }) =>
     (cat === "Todas" || p.categoria === cat) && (!q || p.nombre.toLowerCase().includes(q)) && (!only || total(p) > 0));
   $("#grid").innerHTML = list.length ? list.map(({ p, i }) => {
-    const [cls, txt] = estado(p), s = slides(p);
+    const [cls, txt] = estado(p);
     return `<article class="card">
       <button class="pic" data-i="${i}" style="${bg(p, p.fotos[0], 0)}" aria-label="Ver fotos de ${p.nombre}">
         ${p.fotos.length ? "" : `<span class="ph">${p.nombre[0]}</span>`}
-        <span class="tag ${cls}">${txt}</span><span class="more">${s.length} fotos</span>
-      </button>
-      <div class="body">
-        <div class="row"><span class="name">${p.nombre}</span><span class="price">${fmt(p.precio)}</span></div>
-        <span class="cat">${p.categoria}</span>
-      </div></article>`;
+        <span class="tag ${cls}">${txt}</span>
+        <span class="card-info"><span class="name">${p.nombre}</span><span class="price">${fmt(p.precio)}</span></span>
+      </button></article>`;
   }).join("") : `<p class="empty">No hay prendas que coincidan. Probá con otra categoría o quitá los filtros.</p>`;
 }
 $("#grid").addEventListener("click", e => {
@@ -59,7 +57,7 @@ function pintar() {
   const msg = `Hola! Me interesa "${cur.nombre}"${talle ? ` en talle ${talle}` : ""} (${fmt(cur.precio)}). ¿Sigue disponible?`;
   $("#info").innerHTML = `
     <div class="row"><h2>${cur.nombre}</h2><span class="price">${fmt(cur.precio)}</span></div>
-    <span class="tag ${cls}" style="position:static;align-self:flex-start;background:var(--rose-soft)">${txt}</span>
+    <span class="tag ${cls}" style="position:static;align-self:flex-start">${txt}</span>
     <div class="sizes">${Object.entries(cur.stock).map(([z, n]) =>
       `<button class="size" data-z="${z}" ${n === 0 ? "disabled" : ""} aria-pressed="${talle === z}" aria-label="Talle ${z}${n === 0 ? ", agotado" : ""}">${z}</button>`).join("")}</div>
     <div class="stock">${stockTxt}</div>
@@ -83,6 +81,7 @@ modal.addEventListener("keydown", e => {
 /* ---- Header y footer ---- */
 document.title = TIENDA.nombre;
 $("#brand").textContent = TIENDA.nombre;
+$("#waTop").href = `https://wa.me/${WHATSAPP}`;
 $("#logo").innerHTML = `<img src="${TIENDA.logo}" alt="Logo de ${TIENDA.nombre}">`;
 $("#logo img").onerror = () => { $("#logo").textContent = TIENDA.nombre[0]; };
 $("#footer").innerHTML = `<div class="cols">
